@@ -46,7 +46,7 @@ export const CARS = [
     capacity: 6,
     luggage: 3,
     pricePerKm: 18,
-    image: "https://images.unsplash.com/photo-1621235312384-5f5326776104?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1494905998402-395d579af36f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     features: ["Touchscreen", "Rear AC", "Foldable Seats", "Smooth Ride"]
   },
   {
@@ -56,7 +56,7 @@ export const CARS = [
     capacity: 4,
     luggage: 3,
     pricePerKm: 17,
-    image: "https://images.unsplash.com/photo-1606148664166-7967a44a034f?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     features: ["Wireless Charging", "Turbo Engine", "Ambient Lighting", "ADAS"]
   }
 ];

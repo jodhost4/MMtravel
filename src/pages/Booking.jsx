@@ -1,3 +1,7 @@
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { motion } from 'framer-motion';
 import { MapPin, Calendar, Clock, Car, ChevronRight, CheckCircle2, Navigation2, ArrowLeft, MessageCircle } from 'lucide-react';
 import { CARS } from '../data/dummyData';
 import MapView from '../components/MapView';
@@ -24,21 +28,65 @@ const Booking = () => {
   ];
 
   useEffect(() => {
-    if (location.state?.carId) {
+    let savedDraft = false;
+    const draftStr = localStorage.getItem('bookingDraft');
+    if (draftStr) {
+      try {
+        const draft = JSON.parse(draftStr);
+        if (draft.formData) setFormData(draft.formData);
+        if (draft.selectedCarId) {
+           const car = CARS.find(c => c.id === draft.selectedCarId);
+           if (car) setSelectedCar(car);
+        }
+        if (draft.step) setStep(draft.step);
+        savedDraft = true;
+      } catch(e) {}
+    } 
+    
+    if (!savedDraft) {
+       const storedUserStr = localStorage.getItem('mm_user');
+       if (storedUserStr) {
+          try {
+             const storedUser = JSON.parse(storedUserStr);
+             if (storedUser.address && !formData.pickup) {
+                 setFormData(prev => ({ ...prev, pickup: storedUser.address }));
+             }
+          } catch(e) {}
+       }
+    }
+
+    if (location.state?.carId && !savedDraft) {
       const car = CARS.find(c => c.id === location.state.carId);
       if (car) setSelectedCar(car);
     }
     window.scrollTo(0, 0);
-  }, [location.state]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+     if (step === 3) return;
+     const draft = {
+        formData,
+        selectedCarId: selectedCar?.id,
+        step: step
+     };
+     localStorage.setItem('bookingDraft', JSON.stringify(draft));
+  }, [formData, selectedCar, step]);
 
   const handleBooking = (e) => {
     e.preventDefault();
     if (!selectedCar) return toast.error('Please select a vehicle');
     
+    if (!user) {
+        toast.info('Please sign in to complete your booking');
+        return navigate('/user/login', { state: { from: location } });
+    }
+    
     const toastId = toast.loading('Confirming reservation...');
     
     setTimeout(() => {
       toast.success('Reservation confirmed!', { id: toastId });
+      localStorage.removeItem('bookingDraft');
       setStep(3);
     }, 1500);
   };

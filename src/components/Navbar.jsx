@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -11,6 +11,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,7 +97,7 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="flex items-center space-x-4">
-                <Link to="/user/login" className="text-gray-600 dark:text-gray-300 font-semibold hover:text-primary dark:hover:text-white transition-colors">
+                <Link to="/user/login" state={{ from: location }} className="text-gray-600 dark:text-gray-300 font-semibold hover:text-primary dark:hover:text-white transition-colors">
                   Login
                 </Link>
                 <Link to="/user/register" className="btn btn-primary !rounded-xl !py-2.5 shadow-none hover:shadow-xl hover:shadow-blue-500/20">
@@ -178,6 +179,7 @@ const Navbar = () => {
                   <>
                     <Link
                       to="/user/login"
+                      state={{ from: location }}
                       onClick={() => setIsOpen(false)}
                       className="w-full block py-4 text-center text-white bg-gray-800 rounded-2xl font-bold"
                     >
