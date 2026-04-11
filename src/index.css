@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #1e3a8a; /* Navy Blue */
+  --color-primary-hover: #172554;
+  --color-primary-light: #3b82f6;
+  --color-secondary: #0f172a; /* Near Black */
+  --color-black: #000000;
+  
+  --font-sans: "Inter", "system-ui", "-apple-system", "sans-serif";
+}
+
+@layer base {
+  body {
+    @apply antialiased transition-colors duration-300;
+    @apply text-gray-900 bg-white;
+    font-family: var(--font-sans);
+  }
+
+  .dark body {
+    @apply text-white bg-black;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold transition-all duration-200 active:scale-95 text-sm md:text-base;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-hover shadow-lg shadow-blue-900/20 active:bg-secondary;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary hover:bg-blue-50;
+  }
+
+  .btn-black {
+    @apply bg-black text-white hover:bg-secondary shadow-lg;
+  }
+
+  .card {
+    @apply bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-gray-100 dark:border-white/10 overflow-hidden hover:shadow-xl transition-all duration-300;
+  }
+
+  .section-title {
+    @apply text-2xl md:text-3xl lg:text-4xl font-black text-gray-900 dark:text-white mb-8 tracking-tight;
+  }
+}
+
+@keyframes shine {
+  0% { background-position: -200%; }
+  100% { background-position: 200%; }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8;
+}
+
+/* Container padding responsiveness */
+.container-custom {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
