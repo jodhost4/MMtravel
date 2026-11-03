@@ -55,7 +55,7 @@ const Home = () => {
               <Link to="/booking" className="btn btn-primary text-base md:text-lg px-8 pt-4 pb-4 md:px-12 md:py-5 shadow-2xl shadow-primary/20">
                 Book My Ride
               </Link>
-              <a href="#fleet" className="btn border border-gray-200 dark:border-white/20 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 text-base md:text-lg px-8 pt-4 pb-4 md:px-12 md:py-5">
+              <a href="#fleet" className="btn border border-blue-200 dark:border-white/20 text-blue-900 dark:text-white hover:bg-blue-100 dark:hover:bg-white/10 text-base md:text-lg px-8 pt-4 pb-4 md:px-12 md:py-5">
                 Explore Fleet
               </a>
             </div>
